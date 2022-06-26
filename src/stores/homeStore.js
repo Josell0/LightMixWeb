@@ -6,6 +6,94 @@ export const useHomeStore = defineStore('homeStore', {
     state: () => ({
 
         homeLayers: {
+
+            proyect:[
+                {
+                    proyectName: "",
+                    proyectView: null,
+                    proyectLayers: [
+                        {
+                            nameViewLayers: "",
+                            mainLayers: [
+                                {
+                                    name: "",
+                                    disable: false,
+                                    fondo: ''
+                                },
+
+                            ],
+                            secondLayers: [
+                                {
+                                    name: "Luz Principal",
+                                    valorOpacity: 50,
+                                    valorHue: 0,
+                                    disable: false,
+                                    valorOpacityInterno: null,
+                                    fondo: '../src/assets/img/homeLayers/2bolas-01.VRayLight001.jpg'
+                                },
+                                {
+                                    name: "Luz Secundaria",
+                                    valorOpacity: 50,
+                                    valorHue: 0,
+                                    disable: false,
+                                    valorOpacityInterno: null,
+                                    fondo: '../src/assets/img/homeLayers/2bolas-01.VRayLight002.jpg'
+                                },
+                                {
+                                    name: "Luz de Relleno",
+                                    valorOpacity: 50,
+                                    valorHue: 0,
+                                    disable: false,
+                                    valorOpacityInterno: null,
+                                    fondo: '../src/assets/img/homeLayers/2bolas-01.VRayLight004.jpg'
+                                }
+                            ]
+                        },
+                        {
+                            nameViewLayers: "",
+                            mainLayers: [
+                                {
+                                    name: "",
+                                    disable: false,
+                                    fondo: ''
+                                },
+
+                            ],
+                            secondLayers: [
+                                {
+                                    name: "Luz Principal",
+                                    valorOpacity: 50,
+                                    valorHue: 0,
+                                    disable: false,
+                                    valorOpacityInterno: null,
+                                    fondo: '../src/assets/img/homeLayers/2bolas-01.VRayLight001.jpg'
+                                },
+                                {
+                                    name: "Luz Secundaria",
+                                    valorOpacity: 50,
+                                    valorHue: 0,
+                                    disable: false,
+                                    valorOpacityInterno: null,
+                                    fondo: '../src/assets/img/homeLayers/2bolas-01.VRayLight002.jpg'
+                                },
+                                {
+                                    name: "Luz de Relleno",
+                                    valorOpacity: 50,
+                                    valorHue: 0,
+                                    disable: false,
+                                    valorOpacityInterno: null,
+                                    fondo: '../src/assets/img/homeLayers/2bolas-01.VRayLight004.jpg'
+                                }
+                            ]
+                        },
+                    ]
+                }
+            ],
+
+
+
+            
+
             mainLayers: [
                 '../src/assets/img/homeLayers/2bolas-01.VRayLight003.jpg',
             ],

@@ -112,6 +112,10 @@ import { useHomeStore } from '../stores/homeStore'
 
 const homeStore = useHomeStore()
 
+const proyectLayers = homeStore.homeLayers.proyect[0].proyectLayers;
+
+console.log(proyectLayers);
+
 
 
 </script>
