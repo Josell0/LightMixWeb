@@ -2,7 +2,7 @@
     <div class="cMainHome">
 
         <div class="cLayers" id="imageDownload">
-            <div class="clogoDonwload" id="logoDownload"></div>
+            
             <div class="cMainLayers">
                 <div class="cMainLayer" v-for="(item, index) in homeStore.homeLayers.mainLayers" key="index"
                     :style="{ 'background-image': `url(${item})` }"></div>
@@ -140,14 +140,6 @@ console.log(proyectLayers);
     visibility: hidden;
 }
 
-.clogoDonwload,
-.clogoDonwload h2 {
-    position: absolute;
-    color: rgb(250, 250, 250);
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 2px rgb(32, 32, 32), -2px -2px 2px rgb(32, 32, 32);
-    opacity: 50%;
-}
 
 .cMainHome {
     width: 100%;

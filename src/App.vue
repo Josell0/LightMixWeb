@@ -4,11 +4,15 @@
       <div class="navLogo">
         <router-link to="/"><span class="cLight">lightmix</span><span class="cWeb">WEB</span></router-link>
       </div>
-      <div class="navButtons">
-        <router-link to="/login">Login</router-link>
-        <span>|</span>
-        <router-link to="/register">Register</router-link>
-        <button>Logout</button>
+      <div class="navButtons" v-if="!useStore.loadingSesion">
+        <div v-if="!useStore.userData">
+          <router-link to="/login" >Login</router-link>
+          <span>|</span>
+
+        </div>
+        
+        <router-link to="/register" v-if="!useStore.userData">Register</router-link>
+        <button @click="useStore.logOutUser" v-if="useStore.userData">Logout</button>
 
       </div>
     </nav>
@@ -17,6 +21,11 @@
 </template>
 
 <script setup>
+
+import {useUserStore} from './stores/user'
+
+const useStore = useUserStore()
+
 
 </script>
 
