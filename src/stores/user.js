@@ -7,7 +7,8 @@ export const useUserStore = defineStore('userStore', {
     state: () => ({
         userData: null,
         loadingUser: false,
-        loadingSesion: false
+        loadingSesion: false,
+        iconProyect: '../src/assets/icons/folder.svg'
     }),
     actions: {
         async registerUser(email, password) {
@@ -16,6 +17,7 @@ export const useUserStore = defineStore('userStore', {
                 const { user } = await createUserWithEmailAndPassword(auth, email, password);
                 this.userData = { email: user.email, uid: user.uid };
                 router.push('/');
+                
             } catch (error) {
                 console.log(error)
             } finally {
@@ -28,7 +30,8 @@ export const useUserStore = defineStore('userStore', {
             try {
                 const { user } = await signInWithEmailAndPassword(auth, email, password);
                 this.userData = { email: user.email, uid: user.uid };
-                router.push('/:uid');
+                router.push('/');
+                console.log(user)
             } catch (error) {
                 console.log(error);
             } finally {
@@ -40,7 +43,7 @@ export const useUserStore = defineStore('userStore', {
             try {
                 await signOut(auth);
                 this.userData = null;
-                router.push('/login');
+                router.push('/');
             } catch (error) {
                 console.log(error)
             } finally {

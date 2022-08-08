@@ -1,4 +1,5 @@
 <template>
+
     <div class="cMainHome">
 
         <div class="cLayers" id="imageDownload">
@@ -12,11 +13,15 @@
             <div class="cSecondLayers" v-for="(item, index) in homeStore.homeLayers.secondLayers" key="index">
 
                 <div class="cSecondLayer"
-                    :style="{ 'background-image': `url(${item.fondo})`, 'opacity': `${item.valorOpacity / 100}`, 'filter': `hue-rotate(${item.valorHue + 'deg'}) hue-rotate(${item.valorHue + 'deg'})` }">
+                    :style="{ 'background-image': `url(${item.fondo})`, 'opacity': `${item.valorOpacity / 100}`, 
+                    'filter': `hue-rotate(${item.valorHue + 'deg'}) ` 
+                    }">
                 </div>
 
                 <div class="cSecondLayer"
-                    :style="{ 'background-image': `url(${item.fondo})`, 'opacity': `${item.valorOpacity / 100}`, 'filter': `hue-rotate(${item.valorHue + 'deg'}) hue-rotate(${item.valorHue + 'deg'})` }">
+                    :style="{ 'background-image': `url(${item.fondo})`, 'opacity': `${item.valorOpacity / 100}`, 
+                    'filter': `hue-rotate(${item.valorHue + 'deg'}) ` 
+                    }">
                 </div>
 
             </div>
@@ -112,10 +117,6 @@ import { useHomeStore } from '../stores/homeStore'
 
 const homeStore = useHomeStore()
 
-const proyectLayers = homeStore.homeLayers.proyect[0].proyectLayers;
-
-console.log(proyectLayers);
-
 
 
 </script>
@@ -161,12 +162,10 @@ console.log(proyectLayers);
 
 .cSecondLayer {
     mix-blend-mode: screen;
-
-
     width: 100%;
-    height: 100hv;
     position: absolute;
     top: 0;
+    
 
 }
 

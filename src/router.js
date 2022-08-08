@@ -13,7 +13,7 @@ const requireAuth = async(to, from, next) => {
     if(user){
         next();
     }else{
-        next('/')
+        next()
     }
     userStore.loadingSesion = false;
 };

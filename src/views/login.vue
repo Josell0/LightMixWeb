@@ -20,8 +20,8 @@ import { useUserStore } from '../stores/user';
 const useStore = useUserStore()
 //const router = useRouter()
 
-const email = ref('pupi@michi.com')
-const password = ref('blueblue')
+const email = ref('pupi@blue.com')
+const password = ref('michimichi')
 
 const handleSubmit = async() => {
 
