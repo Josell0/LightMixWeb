@@ -1,28 +1,32 @@
 <template>
-  <div>
-    <nav>
+  <div class="cBodyApp">
+    <!-- <nav class="cNav">
       <div class="navLogo">
         <router-link to="/"><span class="cLight">lightmix</span><span class="cWeb">WEB</span></router-link>
       </div>
+      <p class="cNavUser">{{userStore.userData?.email}}</p>
       <div class="navButtons" v-if="!userStore.loadingSesion">
         <div v-if="!userStore.userData">
-          <router-link to="/login" >Login</router-link>
+          <router-link to="/login">Login</router-link>
+
           <span>|</span>
 
+          <router-link to="/register" v-if="!userStore.userData">Register</router-link>
         </div>
-        
-        <router-link to="/register" v-if="!userStore.userData">Register</router-link>
+
+        <router-link to="/userHome" v-if="userStore.userData">My Proyect</router-link>
+        <span>|</span>
         <button @click="userStore.logOutUser" v-if="userStore.userData">Logout</button>
 
       </div>
-    </nav>
+    </nav> -->
     <router-view></router-view>
   </div>
 </template>
 
 <script setup>
 
-import {useUserStore} from './stores/user'
+import { useUserStore } from './stores/user'
 
 const userStore = useUserStore()
 
@@ -32,18 +36,22 @@ const userStore = useUserStore()
 
 
 <style >
-
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-nav {
+.cBodyApp{
+  width: 100%;
+}
+
+.cNav {
   font-family: sans-serif;
   display: inline-flex;
+  position: relative;
   
-  width: 100%;
- 
+
 
 }
 
@@ -53,7 +61,7 @@ nav a {
   font-weight: bold;
 }
 
-nav .navLogo{
+nav .navLogo {
   padding-top: 1rem;
   padding-left: 1rem;
 }
@@ -98,22 +106,46 @@ nav .navLogo a .cLight {
   }
 }
 
-nav .navButtons{
+nav .navButtons {
   width: 100%;
   padding-top: 1rem;
   padding-right: 1rem;
- display: flex;
- justify-content: right;
- align-items: center;
+  display: flex;
+  justify-content: right;
+  align-items: center;
 }
 
 
-nav .navButtons a, nav .navButtons button {
-  
+nav .navButtons a,
+nav .navButtons button,
+nav .navButtons span {
+
   padding-right: .5rem;
   padding-left: .5rem;
+  color: rgba(0, 0, 0, 0.1);
+
+}
+
+nav .navButtons button {
+  background-color: transparent;
+  border: none;
+  font-family: sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+nav .navButtons a:hover,
+nav .navButtons button:hover {
   color: red;
-  
+
+
+}
+
+@media screen and (max-width: 450px) {
+  .cNav {
+    visibility: hidden;
+  }
 }
 
 </style>

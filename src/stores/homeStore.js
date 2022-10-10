@@ -5,45 +5,142 @@ import domtoimage from 'dom-to-image';
 export const useHomeStore = defineStore('homeStore', {
     state: () => ({
 
-        homeLayers: { 
+        homeLayers: {
 
             mainLayers: [
-                '../src/assets/img/homeLayers/2bolas-01.VRayLight003.jpg',
+                {
+                    name: "Night",
+                    valorOpacity: 100,
+                    disable: false,
+                    valorOpacityInterno: null,
+
+                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-02.luzNoche02-2.jpg'
+                },
+                {
+                    name: "Day",
+                    valorOpacity: 100,
+                    disable: false,
+                    valorOpacityInterno: null,
+
+                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-02.luzDia.jpg'
+                },
+
+
+
             ],
+
             secondLayers: [
                 {
-                    name: "Luz Principal",
-                    valorOpacity: 50,
+                    name: "Table Lights",
+                    valorOpacity: 0,
                     valorHue: 0,
-                    disable: false,
-                    valorOpacityInterno: null,
-                    fondo: '../src/assets/img/homeLayers/2bolas-01.VRayLight001.jpg'
+                    disable: true,
+                    valorOpacityInterno: 100,
+
+                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-02.luzLampMesa.jpg'
                 },
                 {
-                    name: "Luz Secundaria",
-                    valorOpacity: 50,
+                    name: "BarTube",
+                    valorOpacity: 0,
                     valorHue: 0,
-                    disable: false,
-                    valorOpacityInterno: null,
-                    fondo: '../src/assets/img/homeLayers/2bolas-01.VRayLight002.jpg'
+                    disable: true,
+                    valorOpacityInterno: 100,
+                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-02.luzTuboBar00.jpg'
                 },
                 {
-                    name: "Luz de Relleno",
-                    valorOpacity: 50,
+                    name: "Under FootBar",
+                    valorOpacity: 0,
                     valorHue: 0,
-                    disable: false,
-                    valorOpacityInterno: null,
-                    fondo: '../src/assets/img/homeLayers/2bolas-01.VRayLight004.jpg'
-                }
+                    disable: true,
+                    valorOpacityInterno: 100,
+
+                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-01.VRayLight005.jpg'
+                },
+
+                {
+                    name: "Circle Ceiling",
+                    valorOpacity: 0,
+                    valorHue: 0,
+                    disable: true,
+                    valorOpacityInterno: 100,
+                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-01.VRayLight008.jpg'
+                },
+                {
+                    name: "Border Ceiling",
+                    valorOpacity: 0,
+                    valorHue: 0,
+                    disable: true,
+                    valorOpacityInterno: 100,
+                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-01.VRayLight036.jpg'
+                },
+                {
+                    name: "TableDesk Lamp",
+                    valorOpacity: 0,
+                    valorHue: 0,
+                    disable: true,
+                    valorOpacityInterno: 100,
+                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-02.luzAcentos04.jpg'
+                },
+
+                {
+                    name: "Wall Lamps",
+                    valorOpacity: 0,
+                    valorHue: 0,
+                    disable: true,
+                    valorOpacityInterno: 100,
+                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-01.VRayLight635.jpg'
+                },
+                {
+                    name: "Sofa Lamps",
+                    valorOpacity: 0,
+                    valorHue: 0,
+                    disable: true,
+                    valorOpacityInterno: 100,
+                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-01.VRayLight639.jpg'
+                },
+                {
+                    name: "Sun Light",
+                    valorOpacity: 0,
+                    valorHue: 0,
+                    disable: true,
+                    valorOpacityInterno: 100,
+                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-02,Sol.jpg'
+                },
+                {
+                    name: "Domo Light",
+                    valorOpacity: 0,
+                    valorHue: 0,
+                    disable: true,
+                    valorOpacityInterno: 100,
+                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-02.Domo.jpg'
+                },
+                {
+                    name: "Reflections",
+                    valorOpacity: 0,
+                    valorHue: 0,
+                    disable: true,
+                    valorOpacityInterno: 100,
+                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-01.VRayReflection.jpg'
+                },
+                {
+                    name: "Refraction",
+                    valorOpacity: 0,
+                    valorHue: 0,
+                    disable: true,
+                    valorOpacityInterno: 100,
+                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-01.VRayRefraction.jpg'
+                },
+
             ],
 
         },
 
-        visibilityIcons: ['../src/assets/icons/openEye.svg', '../src/assets/icons/closeEye.svg'],
+        visibilityIcons: ['../assets/icons/openEye.svg', '../icons/closeEye.svg'],
 
         profileButtons: {
-            valoresOpacity: [],
-            valoresHue: []
+            valoresMainOpacity: [],
+            valoresSecondaryOpacity: [],
+
         },
 
         disableButtonCreateProfile: false,
@@ -53,62 +150,129 @@ export const useHomeStore = defineStore('homeStore', {
 
     }),
 
+
+
     actions: {
 
-        changeStateOfIcon(index, opacityValor) {
+        changeStateOfIconMain(index, opacityValor) {
 
 
 
-            if (!this.homeLayers.secondLayers[index].disable) {
-                this.homeLayers.secondLayers[index].disable = true
-                this.homeLayers.secondLayers[index].valorOpacity = 0
-                this.homeLayers.secondLayers[index].valorOpacityInterno = parseInt(opacityValor)
-            } else {
+            for (let i = 0; i < this.homeLayers.mainLayers.length; i++) {
+
+
+                this.homeLayers.mainLayers[i].valorOpacity = 0
+            }
+
+
+            this.homeLayers.mainLayers[index].valorOpacity = 100
+
+        },
+
+        changeStateOfIconSecondary(index, opacityValor) {
+
+
+
+
+            if (this.homeLayers.secondLayers[index].disable) {
+
+
+
                 this.homeLayers.secondLayers[index].disable = false
                 this.homeLayers.secondLayers[index].valorOpacity = this.homeLayers.secondLayers[index].valorOpacityInterno
+
+
+            } else {
+
+
+
+
+                this.homeLayers.secondLayers[index].disable = true
+                this.homeLayers.secondLayers[index].valorOpacityInterno = parseInt(opacityValor)
+                this.homeLayers.secondLayers[index].valorOpacity = 0
             }
+        },
+
+        turnAllLightsOff() {
+
+            let valorOpacity = 0;
+
+
+            for (let i = 0; i < this.homeLayers.secondLayers.length; i++) {
+
+
+                this.homeLayers.secondLayers[i].valorOpacity = valorOpacity
+
+            }
+
         },
 
         createProfile() {
 
-            if (this.profileButtons.valoresOpacity.length < 5) {
+            if (this.profileButtons.valoresSecondaryOpacity.length <= 4) {
 
 
-                let valoresOpacityArray = [];
-                let valoresHueArray = [];
-                let valorOpacity = null;
-                let valorHue = null;
+                let valoresSecondaryOpacityArray = [];
 
-                valoresOpacityArray.push(false)
+                let valorSecondaryOpacity = null;
 
-                valoresHueArray.push(false)
+
+                valoresSecondaryOpacityArray.push(false)
+
+
 
                 for (let i = 0; i < this.homeLayers.secondLayers.length; i++) {
 
-                    valorOpacity = parseInt(this.homeLayers.secondLayers[i].valorOpacity)
-                    valorHue = parseInt(this.homeLayers.secondLayers[i].valorHue)
+                    valorSecondaryOpacity = parseInt(this.homeLayers.secondLayers[i].valorOpacity)
 
-                    valoresOpacityArray.push(valorOpacity)
-                    valoresHueArray.push(valorHue)
+
+                    valoresSecondaryOpacityArray.push(valorSecondaryOpacity)
+
 
 
                 }
 
-                
+                this.profileButtons.valoresSecondaryOpacity.push(valoresSecondaryOpacityArray)
 
 
 
-                this.profileButtons.valoresOpacity.push(valoresOpacityArray)
-                this.profileButtons.valoresHue.push(valoresHueArray)
+                let valoresMainOpacityArray = [];
 
-                
+                let valorMainOpacity = null;
+
+
+                valoresMainOpacityArray.push(false)
+
+
+
+                for (let i = 0; i < this.homeLayers.mainLayers.length; i++) {
+
+                    valorMainOpacity = parseInt(this.homeLayers.mainLayers[i].valorOpacity)
+
+
+                    valoresMainOpacityArray.push(valorMainOpacity)
+
+
+
+                }
+
+                this.profileButtons.valoresMainOpacity.push(valoresMainOpacityArray)
+
+
 
                 this.disableButtonCreateProfile = false
 
+              
 
-            } else {
+
+            }  
+            
+            if(this.profileButtons.valoresSecondaryOpacity.length > 4) {
+
                 this.disableButtonCreateProfile = true
             }
+
+
 
         },
 
@@ -116,25 +280,41 @@ export const useHomeStore = defineStore('homeStore', {
 
             for (let i = 0; i < this.homeLayers.secondLayers.length; i++) {
 
-                this.homeLayers.secondLayers[i].valorOpacity = this.profileButtons.valoresOpacity[index][i+1];
-                this.homeLayers.secondLayers[i].valorHue = this.profileButtons.valoresHue[index][i+1];
+                this.homeLayers.secondLayers[i].valorOpacity = this.profileButtons.valoresSecondaryOpacity[index][i + 1];
+                
 
             }
+
+            for (let i = 0; i < this.homeLayers.mainLayers.length; i++) {
+
+                this.homeLayers.mainLayers[i].valorOpacity = this.profileButtons.valoresMainOpacity[index][i + 1];
+                
+
+            }
+
 
 
         },
 
         openAndCloseButtonDelete(index) {
-            this.profileButtons.valoresOpacity[index][0] = !this.profileButtons.valoresOpacity[index][0]
+            this.profileButtons.valoresSecondaryOpacity[index][0] = !this.profileButtons.valoresSecondaryOpacity[index][0]
         },
 
 
         deleteProfile(index) {
-            this.profileButtons.valoresOpacity.splice(index, 1)
-            this.profileButtons.valoresHue.splice(index, 1)
 
-            if (this.profileButtons.valoresOpacity.length < 5) {
+
+            
+            this.profileButtons.valoresSecondaryOpacity.splice(index, 1)
+
+            if (this.profileButtons.valoresSecondaryOpacity.length < 5) {
                 this.disableButtonCreateProfile = false
+            }
+
+            if(this.profileButtons.valoresMainOpacity.length > 1){
+
+                this.profileButtons.valoresMainOpacity.splice(index, 1)
+
             }
         },
 

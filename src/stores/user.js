@@ -8,7 +8,7 @@ export const useUserStore = defineStore('userStore', {
         userData: null,
         loadingUser: false,
         loadingSesion: false,
-        iconProyect: '../src/assets/icons/folder.svg'
+        iconFolder: '../src/assets/icons/folder.svg'
     }),
     actions: {
         async registerUser(email, password) {

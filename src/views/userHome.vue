@@ -1,9 +1,20 @@
 <template>
     <div class="cBoxProyect">
         <h1>Hello {{userStore.userData.email}}</h1>
+        <br>
+        <div class="cMainLayers">
+            <form >
+                <button>+</button>
+            </form>
+        </div>
+
+        <div class="cSecondaryLayers">
+            
+        </div>
+
 
         <div class="cProyect">
-            <img :src="userStore.iconProyect" alt="">
+            <img :src="userStore.iconFolder" alt="">
         </div>
     </div>
 </template>
