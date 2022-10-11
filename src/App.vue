@@ -148,19 +148,15 @@ nav .navButtons button:hover {
 
 }
 
-@media screen and (max-width: 230px) {
+@media screen and (max-width: 450px) {
   .cNav {
     display: none;
     visibility: hidden;
   }
 }
 
-@media screen and (min-device-width: 231px) and (max-device-width: 450px) {
-  .cNav {
-    display: inline-block;
-    
-  }
-}
+
+
 
 </style>
 

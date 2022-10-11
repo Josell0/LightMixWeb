@@ -4,7 +4,7 @@
 
         <div class="cLayers" id="imageDownload">
 
-            
+
             <div class="cMainLayers" v-for="(item, index) in homeStore.homeLayers.mainLayers" key="index">
 
                 <div class="cMainLayer" :style="{ 'background-image': `url(${item.fondo})`, 'opacity': `${item.valorOpacity/100}` 
@@ -17,89 +17,113 @@
 
             <div class="cSecondLayers" v-for="(item, index) in homeStore.homeLayers.secondLayers" key="index">
 
-                <div class="cSecondLayer" :style="{ 'background-image': `url(${item.fondo})`, 'opacity': `${item.valorOpacity/100}`}">
+                <div class="cSecondLayer"
+                    :style="{ 'background-image': `url(${item.fondo})`, 'opacity': `${item.valorOpacity/100}`}">
                 </div>
 
-                
+
             </div>
-            
+
         </div>
-        
-        
+
+
         <div class="cButtons">
 
             <div class="cMainButtons">
 
                 <div class="cBoxOptionsButtons">
 
-                    
+
                 </div>
 
-                <div class="cBoxButton" v-for="(item, index) in homeStore.homeLayers.secondLayers" key="index">
+                <div class="cBoxButtonsLayers">
 
-                    <p class="cButtonName">{{ item.name }}</p>
-                    <div class="cBoxButtonContainer">
+                    <div class="cBoxButtonsSecondary">
 
-                        <div class="cButtonVisibility">
-                            <button @click="homeStore.changeStateOfIconSecondary(index, item.valorOpacity)">
-                                <img v-if="item.disable" :src="homeStore.visibilityIcons[1]" alt="">
-                                <img v-else :src="homeStore.visibilityIcons[0]" alt="">
-
-                            </button>
-                        </div>
-
-                        <div class="cButtonControlers">
-                            <div class="cRangeOpacity">
-
-                                <input type="range" v-model="item.valorOpacity" :disabled="item.disable" min="0"
-                                    max="100">
-
-
-                                <span class="cRangeOpacityValue">{{ item.valorOpacity }}</span>
+                        <div class="cBoxbuttonsSecondaryLayers">
+    
+                            <div class="cBoxButton" v-for="(item, index) in homeStore.homeLayers.secondLayers" key="index">
+        
+                                <p class="cButtonName">{{ item.name }}</p>
+                                <div class="cBoxButtonContainer">
+        
+                                    <div class="cButtonVisibility">
+                                        <button @click="homeStore.changeStateOfIconSecondary(index, item.valorOpacity)">
+                                            <img v-if="item.disable" :src="homeStore.visibilityIcons[1]" alt="">
+                                            <img v-else :src="homeStore.visibilityIcons[0]" alt="">
+        
+                                        </button>
+                                    </div>
+        
+                                    <div class="cButtonControlers">
+                                        <div class="cRangeOpacity">
+        
+                                            <input type="range" v-model="item.valorOpacity" :disabled="item.disable" min="0"
+                                                max="100">
+        
+        
+                                            <span class="cRangeOpacityValue">{{ item.valorOpacity }}</span>
+                                        </div>
+        
+        
+        
+                                    </div>
+        
+                                </div>
+        
+        
                             </div>
-
-
-                            
                         </div>
+                    </div>
 
+
+                    <hr>
+
+                    <div class="cBoxButtonsMain">
+
+                        <p>Main Lights</p>
+
+                        <div class="cBoxbuttonsMainLayers">
+    
+    
+                            <div class="cBoxButton" v-for="(item, index) in homeStore.homeLayers.mainLayers" key="index">
+        
+                                <p class="cButtonName">{{ item.name }}</p>
+                                <div class="cBoxButtonContainer">
+        
+                                    <div class="cButtonVisibility">
+                                        <button @click="homeStore.changeStateOfIconMain(index, item.valorOpacity)">
+                                            <img v-if="item.disable" :src="homeStore.visibilityIcons[1]" alt="">
+                                            <img v-else :src="homeStore.visibilityIcons[0]" alt="">
+        
+                                        </button>
+                                    </div>
+        
+                                    <div class="cButtonControlers">
+                                        <div class="cRangeOpacity">
+        
+                                            <input type="range" v-model="item.valorOpacity" :disabled="item.disable" min="0"
+                                                max="100">
+        
+        
+                                            <span class="cRangeOpacityValue">{{ item.valorOpacity }}</span>
+                                        </div>
+        
+        
+        
+                                    </div>
+        
+                                </div>
+        
+        
+                            </div>
+                        </div>
                     </div>
 
 
                 </div>
 
-                <hr>
 
-                <div class="cBoxButton" v-for="(item, index) in homeStore.homeLayers.mainLayers" key="index">
-
-                    <p class="cButtonName">{{ item.name }}</p>
-                    <div class="cBoxButtonContainer">
-
-                        <div class="cButtonVisibility">
-                            <button @click="homeStore.changeStateOfIconMain(index, item.valorOpacity)">
-                                <img v-if="item.disable" :src="homeStore.visibilityIcons[1]" alt="">
-                                <img v-else :src="homeStore.visibilityIcons[0]" alt="">
-
-                            </button>
-                        </div>
-
-                        <div class="cButtonControlers">
-                            <div class="cRangeOpacity">
-
-                                <input type="range" v-model="item.valorOpacity" :disabled="item.disable" min="0"
-                                    max="100">
-
-
-                                <span class="cRangeOpacityValue">{{ item.valorOpacity }}</span>
-                            </div>
-
-
-                            
-                        </div>
-
-                    </div>
-
-
-                </div>
 
                 <hr>
 
@@ -128,11 +152,12 @@
                     <button class="cButtonNumberProfile" @click="homeStore.changeProfileValue(index)">{{ index + 1
                     }}</button>
                 </div>
-                <p class="cTextPerfilButton" v-if="homeStore.profileButtons.valoresSecondaryOpacity < 1 ">SAVE LIGHT PROFILE >>
+                <p class="cTextPerfilButton" v-if="homeStore.profileButtons.valoresSecondaryOpacity < 1 ">SAVE LIGHT
+                    PROFILE >>
                 </p>
                 <div class="cBoxPerfilButton">
-                    <button class="cbuttonAdd" v-if="!homeStore.disableButtonCreateProfile" @click="homeStore.createProfile()"
-                        :disabled="homeStore.disableButtonCreateProfile" >+</button>
+                    <button class="cbuttonAdd" v-if="!homeStore.disableButtonCreateProfile"
+                        @click="homeStore.createProfile()" :disabled="homeStore.disableButtonCreateProfile">+</button>
 
                 </div>
             </div>
@@ -185,37 +210,37 @@ const homeStore = useHomeStore()
 
 .cMainHome {
     width: 100%;
-    
+
     top: 0;
-    
+
 
 
 }
 
-.cLayers{
+.cLayers {
     position: relative;
 }
 
 
 
-.cMainLayers{
+.cMainLayers {
     width: 100%;
 }
 
 .cMainLayer,
 .cSecondLayer {
-    
+
     height: 100vh;
     background-color: black;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    
+
 
 }
 
-.cMainLayer{
+.cMainLayer {
     width: 100%;
     position: absolute;
     top: 0;
@@ -238,31 +263,48 @@ const homeStore = useHomeStore()
     bottom: 0%;
     height: 95vh;
     padding-bottom: 1rem;
-    
+
     flex-flow: row wrap;
     align-items: flex-end;
-    
 
-    
-    
+
+
+
 }
 
 
 
 .cMainButtons {
-    max-height: 90vh;
 
-    overflow: scroll;
+    display: inline-block;
+
+
     margin-top: 2rem;
-    
+
 
 }
 
+.cBoxButtonsLayers{
+    
+    max-height: 85vh;
+    
+    
+}
+
+.cBoxbuttonsSecondaryLayers{
+    max-height: 70vh;
+    overflow: auto;
+}
+
+.cBoxbuttonsMainLayers{
+    height: auto;
+}
 
 .cBoxButton {
     width: 11.5rem;
     padding: .3rem;
     margin: .5rem;
+    
     border-radius: 0 15px 15px;
     box-shadow: -5px -5px 10px rgb(255, 255, 255, 0.2), 5px 5px 10px rgb(0, 0, 0, 0.12);
 
@@ -314,8 +356,7 @@ const homeStore = useHomeStore()
 }
 
 
-.cRangeOpacity,
-.cRangeHue {
+.cRangeOpacity{
     display: flex;
     align-items: center;
 }
@@ -329,8 +370,8 @@ const homeStore = useHomeStore()
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.cRangeOpacity input,
-.cRangeHueValue input {
+.cRangeOpacity input
+{
     height: .5rem;
 }
 
@@ -338,6 +379,7 @@ const homeStore = useHomeStore()
 .cBoxDownloadButton {
     display: flex;
     align-items: center;
+    position: relative;
 }
 
 .cDownloadButton {
