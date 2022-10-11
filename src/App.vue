@@ -1,6 +1,6 @@
 <template>
   <div class="cBodyApp">
-    <!-- <nav class="cNav">
+    <nav class="cNav">
       <div class="navLogo">
         <router-link to="/"><span class="cLight">lightmix</span><span class="cWeb">WEB</span></router-link>
       </div>
@@ -19,7 +19,7 @@
         <button @click="userStore.logOutUser" v-if="userStore.userData">Logout</button>
 
       </div>
-    </nav> -->
+    </nav>
     <router-view></router-view>
   </div>
 </template>
@@ -46,11 +46,13 @@ const userStore = useUserStore()
   width: 100%;
 }
 
-.cNav {
+nav {
+  width: 100%;
+  display: flex;
   font-family: sans-serif;
-  display: inline-flex;
-  position: relative;
   
+  position: absolute;
+  z-index: 1000;
 
 
 }
@@ -107,12 +109,16 @@ nav .navLogo a .cLight {
 }
 
 nav .navButtons {
-  width: 100%;
+  display: flex;
+  position: absolute;
   padding-top: 1rem;
   padding-right: 1rem;
-  display: flex;
-  justify-content: right;
-  align-items: center;
+  right: 0%;
+  
+  
+  
+  
+  
 }
 
 
@@ -142,9 +148,17 @@ nav .navButtons button:hover {
 
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 230px) {
   .cNav {
+    display: none;
     visibility: hidden;
+  }
+}
+
+@media screen and (min-device-width: 231px) and (max-device-width: 450px) {
+  .cNav {
+    display: inline-block;
+    
   }
 }
 

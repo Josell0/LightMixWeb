@@ -17,18 +17,16 @@
 
             <div class="cSecondLayers" v-for="(item, index) in homeStore.homeLayers.secondLayers" key="index">
 
-                <div class="cSecondLayer" :style="{ 'background-image': `url(${item.fondo})`, 'opacity': `${item.valorOpacity/100}`, 
-                /* 'filter': `hue-rotate(${item.valorHue + 'deg'}) `  */
-                }">
+                <div class="cSecondLayer" :style="{ 'background-image': `url(${item.fondo})`, 'opacity': `${item.valorOpacity/100}`}">
                 </div>
 
-
+                
             </div>
-
+            
         </div>
         
-
-        <!-- <div class="cButtons">
+        
+        <div class="cButtons">
 
             <div class="cMainButtons">
 
@@ -140,7 +138,7 @@
             </div>
 
         </div>
- -->
+
 
 
 
@@ -187,11 +185,15 @@ const homeStore = useHomeStore()
 
 .cMainHome {
     width: 100%;
-    position: absolute;
+    
     top: 0;
-    z-index: -10;
+    
 
 
+}
+
+.cLayers{
+    position: relative;
 }
 
 
@@ -232,10 +234,14 @@ const homeStore = useHomeStore()
 .cButtons {
     display: flex;
     position: absolute;
-    top: 50%;
-    left: 87%;
+    right: 0%;
+    bottom: 0%;
+    height: 95vh;
+    padding-bottom: 1rem;
+    
     flex-flow: row wrap;
     align-items: flex-end;
+    
 
     
     
@@ -244,7 +250,9 @@ const homeStore = useHomeStore()
 
 
 .cMainButtons {
-    display: block;
+    max-height: 90vh;
+
+    overflow: scroll;
     margin-top: 2rem;
     
 
