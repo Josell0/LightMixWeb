@@ -8,13 +8,14 @@ export const useHomeStore = defineStore('homeStore', {
         homeLayers: {
 
             mainLayers: [
+                
                 {
                     name: "Night",
                     valorOpacity: 100,
                     disable: false,
                     valorOpacityInterno: null,
 
-                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-02.luzNoche02-2.jpg'
+                    fondo: '../img/homeLayersLiving/Living-01.noche.jpg'
                 },
                 {
                     name: "Day",
@@ -22,7 +23,15 @@ export const useHomeStore = defineStore('homeStore', {
                     disable: false,
                     valorOpacityInterno: null,
 
-                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-02.luzDia.jpg'
+                    fondo: '../img/homeLayersLiving/Living-01.dia.jpg'
+                },
+                {
+                    name: "Sunset",
+                    valorOpacity: 100,
+                    disable: false,
+                    valorOpacityInterno: null,
+
+                    fondo: '../img/homeLayersLiving/Living-01.atardecer.jpg'
                 },
 
 
@@ -31,105 +40,49 @@ export const useHomeStore = defineStore('homeStore', {
 
             secondLayers: [
                 {
-                    name: "Table Lights",
+                    name: "Rooms Lights",
                     valorOpacity: 0,
                     valorHue: 0,
                     disable: true,
                     valorOpacityInterno: 100,
 
-                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-02.luzLampMesa.jpg'
+                    fondo: '../img/homeLayersLiving/Living-01.LuzSalon04.jpg'
                 },
                 {
-                    name: "BarTube",
+                    name: "Ceiling",
                     valorOpacity: 0,
                     valorHue: 0,
                     disable: true,
                     valorOpacityInterno: 100,
-                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-02.luzTuboBar00.jpg'
+                    fondo: '../img/homeLayersLiving/Living-01.LuzCieloRaso06.jpg'
                 },
                 {
-                    name: "Under FootBar",
+                    name: "Lamps Lights",
                     valorOpacity: 0,
                     valorHue: 0,
                     disable: true,
                     valorOpacityInterno: 100,
 
-                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-01.VRayLight005.jpg'
+                    fondo: '../img/homeLayersLiving/Living-01.LuzArtefactos07.jpg'
                 },
 
                 {
-                    name: "Circle Ceiling",
+                    name: "Table Lamp",
                     valorOpacity: 0,
                     valorHue: 0,
                     disable: true,
                     valorOpacityInterno: 100,
-                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-01.VRayLight008.jpg'
+                    fondo: '../img/homeLayersLiving/Living-01.LuzLampMesa13.jpg'
                 },
                 {
-                    name: "Border Ceiling",
+                    name: "Boxes",
                     valorOpacity: 0,
                     valorHue: 0,
                     disable: true,
                     valorOpacityInterno: 100,
-                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-01.VRayLight036.jpg'
+                    fondo: '../img/homeLayersLiving/Living-01.LuzRepisas02.jpg'
                 },
-                {
-                    name: "TableDesk Lamp",
-                    valorOpacity: 0,
-                    valorHue: 0,
-                    disable: true,
-                    valorOpacityInterno: 100,
-                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-02.luzAcentos04.jpg'
-                },
-
-                {
-                    name: "Wall Lamps",
-                    valorOpacity: 0,
-                    valorHue: 0,
-                    disable: true,
-                    valorOpacityInterno: 100,
-                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-01.VRayLight635.jpg'
-                },
-                {
-                    name: "Sofa Lamps",
-                    valorOpacity: 0,
-                    valorHue: 0,
-                    disable: true,
-                    valorOpacityInterno: 100,
-                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-01.VRayLight639.jpg'
-                },
-                {
-                    name: "Sun Light",
-                    valorOpacity: 0,
-                    valorHue: 0,
-                    disable: true,
-                    valorOpacityInterno: 100,
-                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-02,Sol.jpg'
-                },
-                {
-                    name: "Domo Light",
-                    valorOpacity: 0,
-                    valorHue: 0,
-                    disable: true,
-                    valorOpacityInterno: 100,
-                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-02.Domo.jpg'
-                },
-                {
-                    name: "Reflections",
-                    valorOpacity: 0,
-                    valorHue: 0,
-                    disable: true,
-                    valorOpacityInterno: 100,
-                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-01.VRayReflection.jpg'
-                },
-                {
-                    name: "Refraction",
-                    valorOpacity: 0,
-                    valorHue: 0,
-                    disable: true,
-                    valorOpacityInterno: 100,
-                    fondo: '../img/homeLayersRestoBar/BarResto-InteriorGeneral-01.VRayRefraction.jpg'
-                },
+                
 
             ],
 

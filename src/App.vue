@@ -2,9 +2,9 @@
   <div class="cBodyApp">
     <nav class="cNav">
       <div class="navLogo">
-        <router-link to="/"><span class="cLight">lightmix</span><span class="cWeb">WEB</span></router-link>
+        <router-link to="/"><Logo></Logo></router-link>
       </div>
-      <p class="cNavUser">{{userStore.userData?.email}}</p>
+      <!-- <p class="cNavUser">{{userStore.userData?.email}}</p>
       <div class="navButtons" v-if="!userStore.loadingSesion">
         <div v-if="!userStore.userData">
           <router-link to="/login">Login</router-link>
@@ -18,7 +18,7 @@
         <span>|</span>
         <button @click="userStore.logOutUser" v-if="userStore.userData">Logout</button>
 
-      </div>
+      </div> -->
     </nav>
     <router-view></router-view>
   </div>
@@ -27,6 +27,8 @@
 <script setup>
 
 import { useUserStore } from './stores/user'
+
+import Logo from './components/Logo.vue'
 
 const userStore = useUserStore()
 

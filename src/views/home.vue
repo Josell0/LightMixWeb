@@ -298,6 +298,8 @@ const homeStore = useHomeStore()
 
 .cBoxbuttonsMainLayers{
     height: auto;
+    display: inline-flex;
+    flex-direction: column-reverse;
 }
 
 .cBoxButton {
