@@ -15,7 +15,7 @@ export const useHomeStore = defineStore('homeStore', {
                     disable: false,
                     valorOpacityInterno: null,
 
-                    fondo: '../img/homeLayersLiving/Living-01.noche.jpg'
+                    fondo: 'assets/img/homeLayersLiving/Living-01.noche.jpg'
                 },
                 {
                     name: "Day",
@@ -23,7 +23,7 @@ export const useHomeStore = defineStore('homeStore', {
                     disable: false,
                     valorOpacityInterno: null,
 
-                    fondo: '../img/homeLayersLiving/Living-01.dia.jpg'
+                    fondo: 'assets/img/homeLayersLiving/Living-01.dia.jpg'
                 },
                 {
                     name: "Sunset",
@@ -31,7 +31,7 @@ export const useHomeStore = defineStore('homeStore', {
                     disable: false,
                     valorOpacityInterno: null,
 
-                    fondo: '../img/homeLayersLiving/Living-01.atardecer.jpg'
+                    fondo: 'assets/img/homeLayersLiving/Living-01.atardecer.jpg'
                 },
 
 
@@ -46,7 +46,7 @@ export const useHomeStore = defineStore('homeStore', {
                     disable: true,
                     valorOpacityInterno: 100,
 
-                    fondo: '../img/homeLayersLiving/Living-01.LuzSalon04.jpg'
+                    fondo: 'assets/img/homeLayersLiving/Living-01.LuzSalon04.jpg'
                 },
                 {
                     name: "Ceiling",
@@ -54,7 +54,7 @@ export const useHomeStore = defineStore('homeStore', {
                     valorHue: 0,
                     disable: true,
                     valorOpacityInterno: 100,
-                    fondo: '../img/homeLayersLiving/Living-01.LuzCieloRaso06.jpg'
+                    fondo: 'assets/img/homeLayersLiving/Living-01.LuzCieloRaso06.jpg'
                 },
                 {
                     name: "Lamps Lights",
@@ -63,7 +63,7 @@ export const useHomeStore = defineStore('homeStore', {
                     disable: true,
                     valorOpacityInterno: 100,
 
-                    fondo: '../img/homeLayersLiving/Living-01.LuzArtefactos07.jpg'
+                    fondo: 'assets/img/homeLayersLiving/Living-01.LuzArtefactos07.jpg'
                 },
 
                 {
@@ -72,7 +72,7 @@ export const useHomeStore = defineStore('homeStore', {
                     valorHue: 0,
                     disable: true,
                     valorOpacityInterno: 100,
-                    fondo: '../img/homeLayersLiving/Living-01.LuzLampMesa13.jpg'
+                    fondo: 'assets/img/homeLayersLiving/Living-01.LuzLampMesa13.jpg'
                 },
                 {
                     name: "Boxes",
@@ -80,7 +80,7 @@ export const useHomeStore = defineStore('homeStore', {
                     valorHue: 0,
                     disable: true,
                     valorOpacityInterno: 100,
-                    fondo: '../img/homeLayersLiving/Living-01.LuzRepisas02.jpg'
+                    fondo: 'assets/img/homeLayersLiving/Living-01.LuzRepisas02.jpg'
                 },
                 
 
@@ -88,7 +88,7 @@ export const useHomeStore = defineStore('homeStore', {
 
         },
 
-        visibilityIcons: ['../assets/icons/openEye.svg', '../icons/closeEye.svg'],
+        visibilityIcons: ['assets/icons/openEye.svg', 'assets/icons/closeEye.svg'],
 
         profileButtons: {
             valoresMainOpacity: [],
