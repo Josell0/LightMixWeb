@@ -12,7 +12,7 @@
 <style scoped>
 
 img{
-  width: 8rem;
+  width: 7rem;
   opacity: .2;
 }
 

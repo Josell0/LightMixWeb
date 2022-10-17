@@ -151,6 +151,7 @@ nav .navButtons button:hover {
 }
 
 @media screen and (max-width: 450px) {
+  
   .cNav {
     display: none;
     visibility: hidden;

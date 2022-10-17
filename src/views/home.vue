@@ -31,47 +31,43 @@
 
             <div class="cMainButtons">
 
-                <div class="cBoxOptionsButtons">
-
-
-                </div>
-
                 <div class="cBoxButtonsLayers">
 
                     <div class="cBoxButtonsSecondary">
 
                         <div class="cBoxbuttonsSecondaryLayers">
-    
-                            <div class="cBoxButton" v-for="(item, index) in homeStore.homeLayers.secondLayers" key="index">
-        
+
+                            <div class="cBoxButton" v-for="(item, index) in homeStore.homeLayers.secondLayers"
+                                key="index">
+
                                 <p class="cButtonName">{{ item.name }}</p>
                                 <div class="cBoxButtonContainer">
-        
+
                                     <div class="cButtonVisibility">
                                         <button @click="homeStore.changeStateOfIconSecondary(index, item.valorOpacity)">
                                             <img v-if="item.disable" :src="homeStore.visibilityIcons[1]" alt="">
                                             <img v-else :src="homeStore.visibilityIcons[0]" alt="">
-        
+
                                         </button>
                                     </div>
-        
+
                                     <div class="cButtonControlers">
                                         <div class="cRangeOpacity">
-        
-                                            <input type="range" v-model="item.valorOpacity" :disabled="item.disable" min="0"
-                                                max="100">
-        
-        
+
+                                            <input type="range" v-model="item.valorOpacity" :disabled="item.disable"
+                                                min="0" max="100">
+
+
                                             <span class="cRangeOpacityValue">{{ item.valorOpacity }}</span>
                                         </div>
-        
-        
-        
+
+
+
                                     </div>
-        
+
                                 </div>
-        
-        
+
+
                             </div>
                         </div>
                     </div>
@@ -79,9 +75,9 @@
 
                     <hr>
 
-                    <div class="cBoxButtonsMain">
+                     <div class="cBoxButtonsMain">
 
-                        <p>Main Lights</p>
+                        <p class="cBoxMaintittle">Main Lights</p>
 
                         <div class="cBoxbuttonsMainLayers">
     
@@ -284,19 +280,19 @@ const homeStore = useHomeStore()
 
 }
 
-.cBoxButtonsLayers{
-    
+.cBoxButtonsLayers {
+
     max-height: 85vh;
-    
-    
+
+
 }
 
-.cBoxbuttonsSecondaryLayers{
+.cBoxbuttonsSecondaryLayers {
     max-height: 70vh;
     overflow: auto;
 }
 
-.cBoxbuttonsMainLayers{
+.cBoxbuttonsMainLayers {
     height: auto;
     display: inline-flex;
     flex-direction: column-reverse;
@@ -306,7 +302,7 @@ const homeStore = useHomeStore()
     width: 11.5rem;
     padding: .3rem;
     margin: .5rem;
-    
+
     border-radius: 0 15px 15px;
     box-shadow: -5px -5px 10px rgb(255, 255, 255, 0.2), 5px 5px 10px rgb(0, 0, 0, 0.12);
 
@@ -358,7 +354,7 @@ const homeStore = useHomeStore()
 }
 
 
-.cRangeOpacity{
+.cRangeOpacity {
     display: flex;
     align-items: center;
 }
@@ -372,8 +368,7 @@ const homeStore = useHomeStore()
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.cRangeOpacity input
-{
+.cRangeOpacity input {
     height: .5rem;
 }
 
@@ -478,6 +473,65 @@ const homeStore = useHomeStore()
     top: 10px;
 
 
+}
+
+
+@media only screen and (max-height: 450px) and (orientation: landscape) {
+
+
+    .cBoxbuttonsSecondaryLayers {
+        height: 30vh;
+    }
+
+    .cBoxButton {
+        width: 9rem;
+        padding: .1rem;
+        margin: .3rem;
+
+        box-shadow: -2px -2px 5px rgb(255, 255, 255, 0.2), 2px 2px 5px rgb(0, 0, 0, 0.12);
+    }
+
+    .cButtonName {
+        font-size: .65rem;
+    }
+
+    .cButtonVisibility img {
+        width: 1.2rem;
+        height: 1.2rem;
+
+
+    }
+
+    .cRangeOpacity input {
+        width: 5rem;
+
+    }
+
+    .cBoxMaintittle{
+        display: none;
+    }
+
+    .cDownloadButton {
+        width: 9rem;
+        height: 2rem;
+        font-size: .8rem;
+    }
+
+    .cTextPerfilButton{
+        font-size: 1rem; 
+    }
+
+    .cPerfilButtons .cButtonNumberProfile,
+    .cPerfilButtons .cbuttonAdd {
+        width: 2.5rem;
+        height: 2.5rem;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: rgb(0, 0, 0);
+        text-shadow: 1px 1px 3px #6dcaca;
+        background-color: rgba(1, 1, 1, .05);
+        cursor: pointer;
+    }
 }
 </style>
 
