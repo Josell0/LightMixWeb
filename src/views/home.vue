@@ -206,11 +206,7 @@ const homeStore = useHomeStore()
 
 .cMainHome {
     width: 100%;
-
     top: 0;
-
-
-
 }
 
 .cLayers {

@@ -2,9 +2,11 @@
   <div class="cBodyApp">
     <nav class="cNav">
       <div class="navLogo">
-        <router-link to="/"><Logo></Logo></router-link>
+        <router-link to="/">
+          <Logo></Logo>
+        </router-link>
       </div>
-      <!-- <p class="cNavUser">{{userStore.userData?.email}}</p>
+      <p class="cNavUser">{{userStore.userData?.email}}</p>
       <div class="navButtons" v-if="!userStore.loadingSesion">
         <div v-if="!userStore.userData">
           <router-link to="/login">Login</router-link>
@@ -18,7 +20,7 @@
         <span>|</span>
         <button @click="userStore.logOutUser" v-if="userStore.userData">Logout</button>
 
-      </div> -->
+      </div>
     </nav>
     <router-view></router-view>
   </div>
@@ -44,7 +46,7 @@ const userStore = useUserStore()
   box-sizing: border-box;
 }
 
-.cBodyApp{
+.cBodyApp {
   width: 100%;
 }
 
@@ -52,7 +54,7 @@ nav {
   width: 100%;
   display: flex;
   font-family: sans-serif;
-  
+
   position: absolute;
   z-index: 1000;
 
@@ -75,29 +77,6 @@ nav .navLogo a {
   font-size: 2em;
 }
 
-nav .navLogo a .cWeb {
-  font-weight: 600;
-  color: rgb(255, 255, 255);
-  text-transform: capitalize;
-  background: linear-gradient(-45deg, #eeaa52, #e73c6f, #2394d5, #2af3b7);
-  background-size: 200%, 200%;
-  -webkit-background-clip: text;
-  -webkit-text-stroke: 4px transparent;
-  animation: gradient 5s ease infinite;
-  opacity: 50%;
-
-}
-
-nav .navLogo a .cLight {
-  color: rgb(250, 250, 250);
-  letter-spacing: 2px;
-  text-shadow: 2px 2px 2px rgb(32, 32, 32), -2px -2px 2px rgb(32, 32, 32);
-  opacity: 50%;
-
-}
-
-
-
 @keyframes gradient {
 
   0%,
@@ -116,11 +95,11 @@ nav .navButtons {
   padding-top: 1rem;
   padding-right: 1rem;
   right: 0%;
-  
-  
-  
-  
-  
+
+
+
+
+
 }
 
 
@@ -130,7 +109,7 @@ nav .navButtons span {
 
   padding-right: .5rem;
   padding-left: .5rem;
-  color: rgba(0, 0, 0, 0.1);
+  color: rgb(0, 0, 0);
 
 }
 
@@ -151,15 +130,11 @@ nav .navButtons button:hover {
 }
 
 @media screen and (max-width: 450px) {
-  
+
   .cNav {
     display: none;
     visibility: hidden;
   }
 }
-
-
-
-
 </style>
 

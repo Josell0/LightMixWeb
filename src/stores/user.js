@@ -16,7 +16,7 @@ export const useUserStore = defineStore('userStore', {
             try {
                 const { user } = await createUserWithEmailAndPassword(auth, email, password);
                 this.userData = { email: user.email, uid: user.uid };
-                router.push('/');
+                router.push('/userHome');
                 
             } catch (error) {
                 console.log(error)
@@ -30,9 +30,9 @@ export const useUserStore = defineStore('userStore', {
             try {
                 const { user } = await signInWithEmailAndPassword(auth, email, password);
                 this.userData = { email: user.email, uid: user.uid };
-                router.push('/');
-                console.log(user)
-            } catch (error) {
+                router.push('/userHome');
+                
+            } catch (error) {s
                 console.log(error);
             } finally {
                 this.loadingUser = false
