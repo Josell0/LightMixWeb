@@ -8,8 +8,8 @@
 
                 <hr>
             </div>
-
-            <div class="cProyectLayersUploaded">
+            <p v-if="dataBaseStore.loadingLayers">Loading Layers...</p>
+            <div class="cProyectLayersUploaded" v-else>
 
                 <div class="cMainLayers">
                     <ul v-for="item of dataBaseStore.documents.mainLayers">
@@ -23,9 +23,9 @@
                     </ul>
                 </div>
 
-                <hr>
             </div>
-
+            <hr>
+            
             <div class="cProyectLayersUpload">
 
                 <div class="cMainLayers">
@@ -119,9 +119,10 @@ const handleSecondarySubmit = () => {
     width: 5%;
 }
 
-.cProyectLayersUpload{
+.cProyectLayersUpload, .cProyectLayersUploaded{
     display: flex;
     margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 .cMainLayers, .cSecondaryLayers{

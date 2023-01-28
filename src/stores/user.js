@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { auth } from '../firebaseConfig';
 import router from '../router'
+import { useDataBaseStore } from './dataBase'
 
 export const useUserStore = defineStore('userStore', {
     state: () => ({
@@ -17,7 +18,7 @@ export const useUserStore = defineStore('userStore', {
                 const { user } = await createUserWithEmailAndPassword(auth, email, password);
                 this.userData = { email: user.email, uid: user.uid };
                 router.push('/userHome');
-                
+
             } catch (error) {
                 console.log(error)
             } finally {
@@ -31,23 +32,37 @@ export const useUserStore = defineStore('userStore', {
                 const { user } = await signInWithEmailAndPassword(auth, email, password);
                 this.userData = { email: user.email, uid: user.uid };
                 router.push('/userHome');
-                
-            } catch (error) {s
+
+            } catch (error) {
+                s
                 console.log(error);
+
             } finally {
                 this.loadingUser = false
             }
         },
         async logOutUser() {
+
+
+
+            const dataBaseStore = useDataBaseStore()
+            dataBaseStore.$reset()
+
             this.loadingUser = true
             try {
                 await signOut(auth);
+
                 this.userData = null;
+
+
+
                 router.push('/');
             } catch (error) {
+
                 console.log(error)
             } finally {
                 this.loadingUser = false
+
             }
         },
         currentUser() {
@@ -57,6 +72,10 @@ export const useUserStore = defineStore('userStore', {
                         this.userData = { email: user.email, uid: user.uid };
                     } else {
                         this.userData = null
+                        const dataBaseStore = useDataBaseStore()
+
+                        console.log(this.userData)
+                        dataBaseStore.$reset()
                     }
                     resolve(user)
                 }, e => reject(e))

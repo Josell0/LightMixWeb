@@ -8,68 +8,65 @@ export const useDataBaseStore = defineStore('dataBase', {
         documents: {
             mainLayers: [],
             secondaryLayers: []
-        }
+        },
+        loadingLayers: false
     }),
     actions: {
         async getLayers() {
+
+            if(this.documents.mainLayers.length !== 0){
+                return
+            }
+
+            this.loadingLayers = true
             try {
                 const q = query(collection(db, "projects"), where("user", "==", auth.currentUser.uid));
                 const querySnapShot = await getDocs(q)
                 querySnapShot.forEach(doc => {
-                    
-
-
-
-
+                    /* console.log(doc.id) muestra el id del proyecto*/
                     let data = []
-
                     data.push({
-
-
                         ...doc.data()
                     })
-
-                    
-                    
-
+                    /* console.log(data)  muestra la colleccion incluido el user.id*/
                     for (let i = 0; i < data[0].main.length; i++) {
-
                         this.documents.mainLayers.push({
                             name: data[0].main[i].name,
-                            valorOpacity: 100,
-                            disable: false,
-                            valorOpacityInterno: null,
+                            valorOpacity: data[0].main[i].valorOpacity,
+                            disable: data[0].main[i].disable,
+                            valorOpacityInterno: data[0].main[i].valorOpacityInterno,
                             fondo: data[0].main[i].file
                         })
-
                     }
 
                     for (let i = 0; i < data[0].secondary.length; i++) {
 
                         this.documents.secondaryLayers.push({
                             name: data[0].secondary[i].name,
-                            valorOpacity: 0,
-                            disable: true,
-                            valorOpacityInterno: 100,
+                            valorOpacity: data[0].secondary[i].valorOpacity,
+                            disable: data[0].secondary[i].disable,
+                            valorOpacityInterno: data[0].secondary[i].valorOpacityInterno,
                             fondo: data[0].secondary[i].file
                         })
-
                     }
-
-                    
                 })
-
-
-
             }
-
-
             catch (error) {
                 console.log(error)
             }
             finally {
+                this.loadingLayers = false
+                /* console.log(this.documents.mainLayers) muestra los elementos en el array mainLayers */
+            }
+        },
+
+        async addLayers(){
+            try {
                 
-                console.log(this.documents)
+            } catch (error) {
+                console.log(error)
+            } finally {
+
             }
         }
     }

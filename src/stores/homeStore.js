@@ -42,7 +42,7 @@ export const useHomeStore = defineStore('homeStore', {
                 {
                     name: "Rooms Lights",
                     valorOpacity: 0,
-                    valorHue: 0,
+                    
                     disable: true,
                     valorOpacityInterno: 100,
 
@@ -51,7 +51,7 @@ export const useHomeStore = defineStore('homeStore', {
                 {
                     name: "Ceiling",
                     valorOpacity: 0,
-                    valorHue: 0,
+                    
                     disable: true,
                     valorOpacityInterno: 100,
                     fondo: 'assets/img/homeLayersLiving/Living-01.LuzCieloRaso06.jpg'
@@ -59,7 +59,7 @@ export const useHomeStore = defineStore('homeStore', {
                 {
                     name: "Lamps Lights",
                     valorOpacity: 0,
-                    valorHue: 0,
+                    
                     disable: true,
                     valorOpacityInterno: 100,
 
@@ -69,7 +69,7 @@ export const useHomeStore = defineStore('homeStore', {
                 {
                     name: "Table Lamp",
                     valorOpacity: 0,
-                    valorHue: 0,
+                    
                     disable: true,
                     valorOpacityInterno: 100,
                     fondo: 'assets/img/homeLayersLiving/Living-01.LuzLampMesa13.jpg'
@@ -77,7 +77,7 @@ export const useHomeStore = defineStore('homeStore', {
                 {
                     name: "Boxes",
                     valorOpacity: 0,
-                    valorHue: 0,
+                    
                     disable: true,
                     valorOpacityInterno: 100,
                     fondo: 'assets/img/homeLayersLiving/Living-01.LuzRepisas02.jpg'
