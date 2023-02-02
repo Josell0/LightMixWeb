@@ -12,6 +12,9 @@ export const useUserStore = defineStore('userStore', {
         iconFolder: '../src/assets/icons/folder.svg'
     }),
     actions: {
+
+        
+
         async registerUser(email, password) {
             this.loadingUser = true
             try {
@@ -70,11 +73,11 @@ export const useUserStore = defineStore('userStore', {
                 const unsuscribe = onAuthStateChanged(auth, user => {
                     if (user) {
                         this.userData = { email: user.email, uid: user.uid };
+                        console.log(this.userData)  /* muestra los datos del usuario */
                     } else {
                         this.userData = null
                         const dataBaseStore = useDataBaseStore()
 
-                        console.log(this.userData)
                         dataBaseStore.$reset()
                     }
                     resolve(user)
