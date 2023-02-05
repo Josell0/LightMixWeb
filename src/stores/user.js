@@ -22,6 +22,8 @@ export const useUserStore = defineStore('userStore', {
                 this.userData = { email: user.email, uid: user.uid };
                 router.push('/userHome');
 
+                
+
             } catch (error) {
                 console.log(error)
             } finally {

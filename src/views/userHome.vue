@@ -9,17 +9,20 @@
                 <hr>
             </div>
             <p v-if="dataBaseStore.loadingLayers">Loading Layers...</p>
+            <p v-else-if="dataBaseStore.emptyLayers">Empty Layers...</p>
             <div class="cProyectLayersUploaded" v-else>
 
                 <div class="cMainLayers">
                     <ul v-for="item of dataBaseStore.documents.mainLayers">
-                        <li>{{item.name}}</li>
+                        <li class="cLayerName">{{item.name}}</li>
+                        <button class="buttonDeleteLayer" @click="dataBaseStore.deleteMainLayer(item.name)">x</button>
                     </ul>
                 </div>
-
+                
                 <div class="cSecondaryLayers">
                     <ul v-for="item of dataBaseStore.documents.secondaryLayers">
-                        <li>{{item.name}}</li>
+                        <li class="cLayerName">{{item.name}}</li>
+                        <button class="buttonDeleteLayer" @click="dataBaseStore.deleteSecondaryLayer(item.name)">x</button>
                     </ul>
                 </div>
 
@@ -35,9 +38,9 @@
                     <form @submit.prevent="handleMainSubmit">
                         <input type="text" placeholder="Introduce Layer's Name" v-model="layerMainName">
                         
-                        <input type="file" ref="mainImageInput"/>
+                        <input type="file"  ref="mainImageInput"/>
                         
-                        <button type="submit" :disabled="userStore.loadingUser">Upload Layer</button>
+                        <button type="submit" @click="handleMainClick" :disabled="userStore.loadingUser">Upload Layer</button>
                     </form>
 
                     
@@ -51,9 +54,9 @@
                     <form @submit.prevent="handleSecondarySubmit">
                         <input type="text" placeholder="Introduce Layer's Name" v-model="layerSecondaryName">
                         
-                        <input type="file">
+                        <input type="file" ref="secondaryImageInput"/>
                         
-                        <button type="submit" :disabled="userStore.loadingUser">Upload Layer</button>
+                        <button type="submit"  :disabled="userStore.loadingUser">Upload Layer</button>
                     </form>
 
                 </div>
@@ -61,8 +64,8 @@
             </div>
 
 
-            <div>
-                <button @click="router.push(`/project/${dataBaseStore.projectId}`)">Go to Project</button>
+            <div v-if="!dataBaseStore.emptyLayers"> 
+                <button @click="router.push(`/project/${dataBaseStore.projectId}`)" >Go to Project</button>
             </div>
 
 
@@ -86,6 +89,7 @@ const router = useRouter()
 
 
 const mainImageInput = ref(null);
+const secondaryImageInput = ref(null);
 
 const layerMainName = ref('')
 const layerSecondaryName = ref('')
@@ -97,18 +101,40 @@ const handleMainSubmit = async () => {
         const mainFileImage = input.files[0]
         
         if(mainFileImage){
-            await dataBaseStore.addLayers(mainFileImage, layerMainName.value)
+            await dataBaseStore.addMainLayer(mainFileImage, layerMainName.value)
+        }
+
+       
+        
+       
+        
+    } catch (error) {
+        
+        console.error(error)
+    } finally {
+        layerMainName.value = '',
+        mainImageInput.value.value = null
+    }
+}
+
+/* const handleMainClick =  */
+
+
+const handleSecondarySubmit = async () => {
+    try {
+        const input = secondaryImageInput.value
+        const secondaryFileImage = input.files[0]
+        
+        if(secondaryImageInput){
+            await dataBaseStore.addSecondaryLayer(secondaryFileImage, layerSecondaryName.value)
         }
         
-        /* console.log(file)
-        console.log(layerMainName.value) */
+       
         
     } catch (error) {
         
         console.error(error)
     }
-}
-const handleSecondarySubmit = () => {
     
 }
 
@@ -134,7 +160,7 @@ onMounted(async() => {
 
 .cBoxProyect {
     width: 80%;
-
+    position: relative;
     margin: 2rem;
     padding: 2rem;
     background-color: grey;
@@ -152,13 +178,39 @@ onMounted(async() => {
 }
 
 .cProyectLayersUpload, .cProyectLayersUploaded{
+    position: relative;
     display: flex;
     margin-top: 2rem;
     margin-bottom: 2rem;
+    width: 100%;
 }
 
+
+
+
 .cMainLayers, .cSecondaryLayers{
-    width: 50%;
+    width: 25%;
+    justify-content: flex-end;
+    
+}
+
+.cSecondaryLayers{
+    position: absolute;
+    margin-left: 2rem;
+    right: 0;
+    
+    
+}
+
+.buttonDeleteLayer{
+    float: right;
+}
+
+.cLayerName, .buttonDeleteLayer{
+    display: inline;
+    margin: 2px;
+    text-decoration: none;
+    list-style: none;
 }
 
 input, button{
