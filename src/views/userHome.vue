@@ -15,14 +15,14 @@
                 <div class="cMainLayers">
                     <ul v-for="item of dataBaseStore.documents.mainLayers">
                         <li class="cLayerName">{{item.name}}</li>
-                        <button class="buttonDeleteLayer" @click="dataBaseStore.deleteMainLayer(item.name)">x</button>
+                        <button class="buttonDeleteLayer" @click="dataBaseStore.deleteMainLayer(item.name)" :disabled="dataBaseStore.buttonDeleteLayer" >x</button>
                     </ul>
                 </div>
                 
                 <div class="cSecondaryLayers">
                     <ul v-for="item of dataBaseStore.documents.secondaryLayers">
                         <li class="cLayerName">{{item.name}}</li>
-                        <button class="buttonDeleteLayer" @click="dataBaseStore.deleteSecondaryLayer(item.name)">x</button>
+                        <button class="buttonDeleteLayer" @click="dataBaseStore.deleteSecondaryLayer(item.name)" :disabled="dataBaseStore.buttonDeleteLayer">x</button>
                     </ul>
                 </div>
 
@@ -80,7 +80,8 @@ import { useUserStore } from '../stores/user';
 import {useDataBaseStore} from '../stores/dataBase';
 import { useRouter } from 'vue-router';
 import { async } from '@firebase/util';
-/* import { async } from '@firebase/util'; */
+
+
 
 const userStore = useUserStore()
 const dataBaseStore = useDataBaseStore()
@@ -93,6 +94,9 @@ const secondaryImageInput = ref(null);
 
 const layerMainName = ref('')
 const layerSecondaryName = ref('')
+
+
+
 
 const handleMainSubmit = async () => {
     /* captura la imagen y nombre del layer main */
@@ -142,6 +146,8 @@ onMounted(async() => {
 
     /* codigo para cargar los datos cuando inicia la aplicacion */
     dataBaseStore.getLayers()
+
+    
 })
 
 

@@ -2,7 +2,7 @@ import { collection, doc, addDoc, getDocs, query, updateDoc, where, arrayUnion, 
 import { defineStore } from 'pinia'
 import { db, storage } from '../firebaseConfig'
 import { auth } from '../firebaseConfig'
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { useUserStore } from '../stores/user';
 
 
@@ -22,7 +22,8 @@ export const useDataBaseStore = defineStore('dataBase', {
         },
         loadingLayers: false,
         emptyLayers: false,
-        projectId: null
+        projectId: null,
+        buttonDeleteLayer: false,
 
     }),
     actions: {
@@ -33,21 +34,21 @@ export const useDataBaseStore = defineStore('dataBase', {
                 return
             }
 
-            
+
 
             this.loadingLayers = true
-            
+
 
             try {
                 const q = query(collection(db, "projects"), where("user", "==", auth.currentUser.uid))
 
-                
+
 
                 const querySnapShot = await getDocs(q)
 
-                if (querySnapShot.size === 0){
+                if (querySnapShot.size === 0) {
                     this.emptyLayers = true
-                    
+
 
                     console.log('no hay documentos')
 
@@ -56,8 +57,8 @@ export const useDataBaseStore = defineStore('dataBase', {
                         secondary: [],
                         user: auth.currentUser.uid
                     }
-                    const docRef = await addDoc(collection(db,"projects"),arrayInitial)
-                    
+                    const docRef = await addDoc(collection(db, "projects"), arrayInitial)
+
                     this.projectId = docRef.id
 
                     return
@@ -66,7 +67,7 @@ export const useDataBaseStore = defineStore('dataBase', {
                 querySnapShot.forEach(doc => {
                     /* console.log(doc.id) muestra el id del proyecto*/
                     this.projectId = doc.id
-                    
+
                     let data = []
                     data.push({
                         ...doc.data()
@@ -96,13 +97,13 @@ export const useDataBaseStore = defineStore('dataBase', {
                         })
                     }
                 })
-                
+
                 /* console.log(this.documents.mainLayers) /* muestra los elementos en el array mainLayers */
 
                 if (this.documents.mainLayers.length === 0 && this.documents.secondaryLayers.length === 0) {
-                    
+
                     this.emptyLayers = true
-                    
+
                 }
             }
             catch (error) {
@@ -156,16 +157,16 @@ export const useDataBaseStore = defineStore('dataBase', {
                 })
 
                 if (this.documents.mainLayers.length !== 0 || this.documents.secondaryLayers.length !== 0) {
-                    
+
                     this.emptyLayers = false
                 }
 
             } catch (error) {
                 console.log(error)
             } finally {
-                
-                
-                
+
+
+
             }
         },
 
@@ -212,97 +213,118 @@ export const useDataBaseStore = defineStore('dataBase', {
                 })
 
                 if (this.documents.mainLayers.length !== 0 || this.documents.secondaryLayers.length !== 0) {
-                    
+
                     this.emptyLayers = false
                 }
 
             } catch (error) {
                 console.log(error)
             } finally {
-                
+
             }
         },
 
         async deleteMainLayer(name) {
             try {
+
+                this.buttonDeleteLayer = true
+
+                const userStore = useUserStore()
+
+                const storageRef = ref(storage, `${userStore.userData.uid}/project/${name}`);
+                deleteObject(storageRef).then(() => {
+                    
+                })
+
                 const docRef = doc(db, 'projects', this.projectId)
-                
+
                 /* Metodo para eliminar en la base de datos firebase */
                 await runTransaction(db, async transaction => {
                     const userDoc = await transaction.get(docRef);
                     if (!userDoc.exists) {
-                      throw 'El documento no existe';
+                        throw 'El documento no existe';
                     }
                     // Obtener el array main
                     const mainArray = userDoc.get('main');
-                
+
                     // Encontrar el índice del mapa que se quiere eliminar
                     const mapToDeleteIndex = mainArray.findIndex(map => map.name === name);
-                
+
                     // Eliminar el mapa
                     mainArray.splice(mapToDeleteIndex, 1);
-                
+
                     // Actualizar el documento
                     transaction.update(docRef, { main: mainArray });
-                  });
-                  
+                });
 
-                  /* Metodo para eliminar layer del MainLayer */
-                  const mainLayersData = this.documents.mainLayers
-                  const mapDeleteindex = mainLayersData.findIndex(map =>map.name === name)
 
-                  mainLayersData.splice(mapDeleteindex, 1)
-                
-                  if (this.documents.mainLayers.length === 0 && this.documents.secondaryLayers.length === 0) {
+                /* Metodo para eliminar layer del MainLayer */
+                const mainLayersData = this.documents.mainLayers
+                const mapDeleteindex = mainLayersData.findIndex(map => map.name === name)
+
+                mainLayersData.splice(mapDeleteindex, 1)
+
+                if (this.documents.mainLayers.length === 0 && this.documents.secondaryLayers.length === 0) {
                     this.emptyLayers = true
                 }
             } catch (error) {
                 console.log(error)
-            } finally{
-                
-                
-                
+            } finally {
+
+                this.buttonDeleteLayer = false
+
             }
         },
 
         async deleteSecondaryLayer(name) {
             try {
+
+                this.buttonDeleteLayer = true
+
+                const userStore = useUserStore()
+
+                const storageRef = ref(storage, `${userStore.userData.uid}/project/${name}`);
+                deleteObject(storageRef).then(() => {
+                    
+                })
+
+
                 const docRef = doc(db, 'projects', this.projectId)
-                
+
                 /* Metodo para eliminar en la base de datos firebase */
                 await runTransaction(db, async transaction => {
                     const userDoc = await transaction.get(docRef);
                     if (!userDoc.exists) {
-                      throw 'El documento no existe';
+                        throw 'El documento no existe';
                     }
                     // Obtener el array main
                     const secondaryArray = userDoc.get('secondary');
-                
+
                     // Encontrar el índice del mapa que se quiere eliminar
                     const mapToDeleteIndex = secondaryArray.findIndex(map => map.name === name);
-                
+
                     // Eliminar el mapa
                     secondaryArray.splice(mapToDeleteIndex, 1);
-                
+
                     // Actualizar el documento
                     transaction.update(docRef, { secondary: secondaryArray });
-                  });
-                  
+                });
 
-                  /* Metodo para eliminar layer del MainLayer */
-                  const secondaryLayersData = this.documents.secondaryLayers
-                  const mapDeleteindex = secondaryLayersData.findIndex(map =>map.name === name)
 
-                  secondaryLayersData.splice(mapDeleteindex, 1)
-                
-                  if (this.documents.mainLayers.length === 0 && this.documents.secondaryLayers.length === 0) {
+                /* Metodo para eliminar layer del MainLayer */
+                const secondaryLayersData = this.documents.secondaryLayers
+                const mapDeleteindex = secondaryLayersData.findIndex(map => map.name === name)
+
+                secondaryLayersData.splice(mapDeleteindex, 1)
+
+                if (this.documents.mainLayers.length === 0 && this.documents.secondaryLayers.length === 0) {
                     this.emptyLayers = true
                 }
 
             } catch (error) {
                 console.log(error)
-            }finally{
-               
+            } finally {
+                this.buttonDeleteLayer = false
             }
         },
 
