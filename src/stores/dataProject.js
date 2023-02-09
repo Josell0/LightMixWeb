@@ -8,7 +8,7 @@ import 'firebase/firestore'
 
 export const useDataProjectStore = defineStore('dataProject', {
     state: () => ({
-        documents:  {
+        documents: {
             mainLayers: [],
             secondaryLayers: [],
         },
@@ -65,70 +65,128 @@ export const useDataProjectStore = defineStore('dataProject', {
             }
         },
 
-        createProfile() {
+        async createProfile(pid) {
 
-            if (this.profileButtons.valoresSecondaryOpacity.length <= 4) {
+            try {
 
+                /* esto verifica que existan menos de 5 botenes de Perfiles, asi no deja agregar mas de lo establecido */
+                if (this.profileButtons.valoresSecondaryOpacity.length <= 4) {
 
-                let valoresSecondaryOpacityArray = [];
+                    /* almacena un array para luego hacerle un push a la variable valorSecondaryOpacity */
+                    let valoresSecondaryOpacityArray = [];
 
-                let valorSecondaryOpacity = null;
-
-
-                valoresSecondaryOpacityArray.push(false)
-
-
-
-                for (let i = 0; i < this.documents.secondaryLayers.length; i++) {
-
-                    valorSecondaryOpacity = parseInt(this.documents.secondaryLayers[i].valorOpacity)
+                    /* array para agregar cada valor a valoresSecondaryOpacityArray */
+                    let valorSecondaryOpacity = null;
 
 
-                    valoresSecondaryOpacityArray.push(valorSecondaryOpacity)
+                    valoresSecondaryOpacityArray.push(false)
+
+
+
+                    /* almacena los valores de cada valorSecondaryOpacity y los mete a un array */
+                    for (let i = 0; i < this.documents.secondaryLayers.length; i++) {
+
+                        valorSecondaryOpacity = parseInt(this.documents.secondaryLayers[i].valorOpacity)
+
+
+                        valoresSecondaryOpacityArray.push(valorSecondaryOpacity)
+
+                        
+
+                    }
+
+                    let valoresMainOpacityArray = [];
+
+                    let valorMainOpacity = null;
+
+
+                    valoresMainOpacityArray.push(false)
+
+
+
+                    for (let i = 0; i < this.documents.mainLayers.length; i++) {
+
+                        valorMainOpacity = parseInt(this.documents.mainLayers[i].valorOpacity)
+
+
+                        valoresMainOpacityArray.push(valorMainOpacity)
+
+
+
+                    }
+
+
+
+
+                    //Agregar los valores secundarios al array correspondiente
+
+                    let existsSecondary = false;
+
+                    for (let i = 0; i < this.profileButtons.valoresSecondaryOpacity.length; i++) {
+                        if (JSON.stringify(this.profileButtons.valoresSecondaryOpacity[i]) === JSON.stringify(valoresSecondaryOpacityArray)) {
+                            existsSecondary = true;
+                            
+                            break;
+                        }
+                    }
+
+                    //Agregar los valores primarios al array correspondiente
+
+                    let existsMain = false;
+
+                    for (let i = 0; i < this.profileButtons.valoresMainOpacity.length; i++) {
+                        if (JSON.stringify(this.profileButtons.valoresMainOpacity[i]) === JSON.stringify(valoresMainOpacityArray)) {
+                            existsMain = true;
+                            
+                            break;
+                        }
+                    }
+
+                    //Agrega los valores al profileButtons
+
+                    if (!existsMain || !existsSecondary ) {
+                        this.profileButtons.valoresMainOpacity.push(valoresMainOpacityArray);
+                        this.profileButtons.valoresSecondaryOpacity.push(valoresSecondaryOpacityArray);
+                        
+                    } else{
+                        console.log('cambia los valores para agregar un perfil')
+                    }
+
+
+
+
+                    //Agregar los valores primarios y secundarios a firebase
+
+                    const docSecondaryRef = doc(db, 'projects', pid)
+                    
+                    
+                    await updateDoc(docSecondaryRef, {
+                    
+                        valoresSecondaryOpacity: arrayUnion({
+                            main: [...valoresMainOpacityArray],
+                            secondary: [...valoresSecondaryOpacityArray]
+                        })
+                    
+                    
+                    })
+                    
+
+
+                    this.disableButtonCreateProfile = false
+
 
 
 
                 }
 
-                this.profileButtons.valoresSecondaryOpacity.push(valoresSecondaryOpacityArray)
+                if (this.profileButtons.valoresSecondaryOpacity.length > 4) {
 
-
-
-                let valoresMainOpacityArray = [];
-
-                let valorMainOpacity = null;
-
-
-                valoresMainOpacityArray.push(false)
-
-
-
-                for (let i = 0; i < this.documents.mainLayers.length; i++) {
-
-                    valorMainOpacity = parseInt(this.documents.mainLayers[i].valorOpacity)
-
-
-                    valoresMainOpacityArray.push(valorMainOpacity)
-
-
-
+                    this.disableButtonCreateProfile = true
                 }
-
-                this.profileButtons.valoresMainOpacity.push(valoresMainOpacityArray)
-
-
-
-                this.disableButtonCreateProfile = false
-
-              
-
-
-            }  
-            
-            if(this.profileButtons.valoresSecondaryOpacity.length > 4) {
-
-                this.disableButtonCreateProfile = true
+            } catch (error) {
+                console.log(error)
             }
+
 
 
 
@@ -139,14 +197,14 @@ export const useDataProjectStore = defineStore('dataProject', {
             for (let i = 0; i < this.documents.secondaryLayers.length; i++) {
 
                 this.documents.secondaryLayers[i].valorOpacity = this.profileButtons.valoresSecondaryOpacity[index][i + 1];
-                
+
 
             }
 
             for (let i = 0; i < this.documents.mainLayers.length; i++) {
 
                 this.documents.mainLayers[i].valorOpacity = this.profileButtons.valoresMainOpacity[index][i + 1];
-                
+
 
             }
 
@@ -159,9 +217,9 @@ export const useDataProjectStore = defineStore('dataProject', {
                 const docRef = doc(db, "projects", nameDoc);
                 const docSnap = await getDoc(docRef);
 
-                
 
-               
+
+
 
                 if (!docSnap.exists()) {
                     console.log('no hay documentos')
@@ -174,45 +232,45 @@ export const useDataProjectStore = defineStore('dataProject', {
                     ...docSnap.data()
                 })
 
-                
-                
+
+
                 let dataMainLayers = data[0].main
                 let dataSecondaryLayers = data[0].secondary
 
 
-                
-                
-                
-                for (let i = 0; i < dataMainLayers.length; i++) {
-                    
-                    this.documents.mainLayers.push({
-                    
-                    name: dataMainLayers[i].name,
-                    valorOpacity: dataMainLayers[i].valorOpacity,
-                    disable: dataMainLayers[i].disable,
-                    valorOpacityInterno: dataMainLayers[i].valorOpacityInterno,
-                    fondo: dataMainLayers[i].fondo
-                      
-                    })     
-                }
-                
-                for (let i = 0; i < dataSecondaryLayers.length; i++) {
-                    
-                    this.documents.secondaryLayers.push({
-                    
-                    name: dataSecondaryLayers[i].name,
-                    valorOpacity: dataSecondaryLayers[i].valorOpacity,
-                    disable: dataSecondaryLayers[i].disable,
-                    valorOpacityInterno: dataSecondaryLayers[i].valorOpacityInterno,
-                    fondo: dataSecondaryLayers[i].fondo
-                      
-                    })     
-                }
-                
-                /* console.log(this.documents) */
- 
 
-            } catch (error) {   
+
+
+                for (let i = 0; i < dataMainLayers.length; i++) {
+
+                    this.documents.mainLayers.push({
+
+                        name: dataMainLayers[i].name,
+                        valorOpacity: dataMainLayers[i].valorOpacity,
+                        disable: dataMainLayers[i].disable,
+                        valorOpacityInterno: dataMainLayers[i].valorOpacityInterno,
+                        fondo: dataMainLayers[i].fondo
+
+                    })
+                }
+
+                for (let i = 0; i < dataSecondaryLayers.length; i++) {
+
+                    this.documents.secondaryLayers.push({
+
+                        name: dataSecondaryLayers[i].name,
+                        valorOpacity: dataSecondaryLayers[i].valorOpacity,
+                        disable: dataSecondaryLayers[i].disable,
+                        valorOpacityInterno: dataSecondaryLayers[i].valorOpacityInterno,
+                        fondo: dataSecondaryLayers[i].fondo
+
+                    })
+                }
+
+                /* console.log(this.documents) */
+
+
+            } catch (error) {
                 console.log(error)
             } finally {
 
@@ -227,14 +285,14 @@ export const useDataProjectStore = defineStore('dataProject', {
         deleteProfile(index) {
 
 
-            
+
             this.profileButtons.valoresSecondaryOpacity.splice(index, 1)
 
             if (this.profileButtons.valoresSecondaryOpacity.length < 5) {
                 this.disableButtonCreateProfile = false
             }
 
-            if(this.profileButtons.valoresMainOpacity.length > 1){
+            if (this.profileButtons.valoresMainOpacity.length > 1) {
 
                 this.profileButtons.valoresMainOpacity.splice(index, 1)
 

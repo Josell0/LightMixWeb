@@ -55,6 +55,11 @@ export const useDataBaseStore = defineStore('dataBase', {
                     const arrayInitial = {
                         main: [],
                         secondary: [],
+                        
+                        valoresMainOpacity: [],
+                        valoresSecondaryOpacity: [],
+                
+                        
                         user: auth.currentUser.uid
                     }
                     const docRef = await addDoc(collection(db, "projects"), arrayInitial)

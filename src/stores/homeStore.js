@@ -172,6 +172,8 @@ export const useHomeStore = defineStore('homeStore', {
 
                 valoresSecondaryOpacityArray.push(false)
 
+                
+
 
 
                 for (let i = 0; i < this.homeLayers.secondLayers.length; i++) {
@@ -186,6 +188,9 @@ export const useHomeStore = defineStore('homeStore', {
                 }
 
                 this.profileButtons.valoresSecondaryOpacity.push(valoresSecondaryOpacityArray)
+
+
+                console.log(this.profileButtons.valoresSecondaryOpacity)
 
 
 
@@ -210,6 +215,8 @@ export const useHomeStore = defineStore('homeStore', {
                 }
 
                 this.profileButtons.valoresMainOpacity.push(valoresMainOpacityArray)
+
+                console.log(this.profileButtons.valoresMainOpacity)
 
 
 

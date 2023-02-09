@@ -154,7 +154,7 @@
                 </p>
                 <div class="cBoxPerfilButton">
                     <button class="cbuttonAdd" v-if="!dataBaseProject.disableButtonCreateProfile"
-                        @click="dataBaseProject.createProfile()" :disabled="dataBaseProject.disableButtonCreateProfile">+</button>
+                        @click="dataBaseProject.createProfile(route.params.pid)" :disabled="dataBaseProject.disableButtonCreateProfile">+</button>
 
                 </div>
             </div>

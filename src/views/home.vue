@@ -191,7 +191,7 @@ const homeStore = useHomeStore()
 
 
 
-/* .opacityCero {
+.opacityCero {
     opacity: 0;
 }
 
@@ -201,7 +201,7 @@ const homeStore = useHomeStore()
 
 .cDisplayOff {
     visibility: hidden;
-} */
+}
 
 
 .cMainHome {
