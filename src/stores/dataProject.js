@@ -1,4 +1,4 @@
-import { collection, doc, addDoc, getDoc, getDocs, query, updateDoc, where, arrayUnion, runTransaction } from 'firebase/firestore/lite'
+import { collection, doc, addDoc, getDoc, getDocs, query, updateDoc, arrayUnion, runTransaction } from 'firebase/firestore/lite'
 import { defineStore } from 'pinia'
 import { db, storage } from '../firebaseConfig'
 import { useUserStore } from '../stores/user'
@@ -91,7 +91,7 @@ export const useDataProjectStore = defineStore('dataProject', {
 
                         valoresSecondaryOpacityArray.push(valorSecondaryOpacity)
 
-                        
+
 
                     }
 
@@ -125,7 +125,7 @@ export const useDataProjectStore = defineStore('dataProject', {
                     for (let i = 0; i < this.profileButtons.valoresSecondaryOpacity.length; i++) {
                         if (JSON.stringify(this.profileButtons.valoresSecondaryOpacity[i]) === JSON.stringify(valoresSecondaryOpacityArray)) {
                             existsSecondary = true;
-                            
+
                             break;
                         }
                     }
@@ -137,18 +137,18 @@ export const useDataProjectStore = defineStore('dataProject', {
                     for (let i = 0; i < this.profileButtons.valoresMainOpacity.length; i++) {
                         if (JSON.stringify(this.profileButtons.valoresMainOpacity[i]) === JSON.stringify(valoresMainOpacityArray)) {
                             existsMain = true;
-                            
+
                             break;
                         }
                     }
 
                     //Agrega los valores al profileButtons
 
-                    if (!existsMain || !existsSecondary ) {
+                    if (!existsMain || !existsSecondary) {
                         this.profileButtons.valoresMainOpacity.push(valoresMainOpacityArray);
                         this.profileButtons.valoresSecondaryOpacity.push(valoresSecondaryOpacityArray);
-                        
-                    } else{
+
+                    } else {
                         console.log('cambia los valores para agregar un perfil')
                     }
 
@@ -158,18 +158,18 @@ export const useDataProjectStore = defineStore('dataProject', {
                     //Agregar los valores primarios y secundarios a firebase
 
                     const docSecondaryRef = doc(db, 'projects', pid)
-                    
-                    
+
+
                     await updateDoc(docSecondaryRef, {
-                    
-                        valoresSecondaryOpacity: arrayUnion({
+
+                        valoresProfiles: arrayUnion({
                             main: [...valoresMainOpacityArray],
                             secondary: [...valoresSecondaryOpacityArray]
                         })
-                    
-                    
+
+
                     })
-                    
+
 
 
                     this.disableButtonCreateProfile = false
@@ -214,6 +214,13 @@ export const useDataProjectStore = defineStore('dataProject', {
 
         async getProjectLayers(nameDoc) {
             try {
+
+
+                //Reinicia el store
+                const dataStore = useDataProjectStore()
+                dataStore.$reset()
+
+
                 const docRef = doc(db, "projects", nameDoc);
                 const docSnap = await getDoc(docRef);
 
@@ -232,15 +239,17 @@ export const useDataProjectStore = defineStore('dataProject', {
                     ...docSnap.data()
                 })
 
-
+                
 
                 let dataMainLayers = data[0].main
                 let dataSecondaryLayers = data[0].secondary
 
+                let dataValoresProfiles = data[0].valoresProfiles
 
 
 
 
+                //lee de data los layers principales y los agrega a documents.mainLayers
                 for (let i = 0; i < dataMainLayers.length; i++) {
 
                     this.documents.mainLayers.push({
@@ -254,6 +263,7 @@ export const useDataProjectStore = defineStore('dataProject', {
                     })
                 }
 
+                //lee de data los layers secundarios y los agrega a documents.secondaryLayers
                 for (let i = 0; i < dataSecondaryLayers.length; i++) {
 
                     this.documents.secondaryLayers.push({
@@ -267,7 +277,17 @@ export const useDataProjectStore = defineStore('dataProject', {
                     })
                 }
 
-                /* console.log(this.documents) */
+                if (dataValoresProfiles.length > 0) {
+
+                    for (let i = 0; i < dataValoresProfiles.length; i++) {
+
+                        this.profileButtons.valoresMainOpacity.push(dataValoresProfiles[i].main)
+                        this.profileButtons.valoresSecondaryOpacity.push(dataValoresProfiles[i].secondary)
+                    }
+                }
+
+
+
 
 
             } catch (error) {
@@ -277,12 +297,14 @@ export const useDataProjectStore = defineStore('dataProject', {
             }
         },
 
+
+
         openAndCloseButtonDelete(index) {
             this.profileButtons.valoresSecondaryOpacity[index][0] = !this.profileButtons.valoresSecondaryOpacity[index][0]
         },
 
 
-        deleteProfile(index) {
+        async deleteProfile(index, pid) {
 
 
 
@@ -297,6 +319,35 @@ export const useDataProjectStore = defineStore('dataProject', {
                 this.profileButtons.valoresMainOpacity.splice(index, 1)
 
             }
+
+            try {
+
+
+                const docRef = doc(db, 'projects', pid)
+
+
+                await runTransaction(db, async transaction => {
+                    const doc = await transaction.get(docRef)
+                    const regionArray = doc.get("valoresProfiles")
+
+
+                    //filtra el array que no queremos y devuelve todos los array que si
+                    const updatedRegionsArray = regionArray.filter((value, id) => id !== index);
+
+
+                    // Inserta todos los array que si quedan en el documento de nuestra coleccion en firebase
+                    transaction.update(docRef, {
+                        valoresProfiles: updatedRegionsArray
+                    })
+
+
+                })
+
+
+            } catch (error) {
+                console.log(error)
+            }
+
         },
 
         imageDownload() {

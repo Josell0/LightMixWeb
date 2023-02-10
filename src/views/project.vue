@@ -140,7 +140,7 @@
                     key="index">
                     <button class="cButtonDeleteProfile"
                         :class="[dataBaseProject.profileButtons.valoresSecondaryOpacity[index][0] ? 'cDisplayOn' : 'cDisplayOff']"
-                        @click="dataBaseProject.deleteProfile(index)">Delete
+                        @click="dataBaseProject.deleteProfile(index, route.params.pid)">Delete
                     </button>
 
                     <button class="cButtonDeleteMenuProfile"

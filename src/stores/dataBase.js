@@ -56,8 +56,8 @@ export const useDataBaseStore = defineStore('dataBase', {
                         main: [],
                         secondary: [],
                         
-                        valoresMainOpacity: [],
-                        valoresSecondaryOpacity: [],
+                        valoresProfiles: [],
+                        
                 
                         
                         user: auth.currentUser.uid
@@ -236,6 +236,8 @@ export const useDataBaseStore = defineStore('dataBase', {
 
                 const userStore = useUserStore()
 
+
+                //Elimina la imagen del storage
                 const storageRef = ref(storage, `${userStore.userData.uid}/project/${name}`);
                 deleteObject(storageRef).then(() => {
                     

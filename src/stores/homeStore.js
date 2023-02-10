@@ -190,7 +190,7 @@ export const useHomeStore = defineStore('homeStore', {
                 this.profileButtons.valoresSecondaryOpacity.push(valoresSecondaryOpacityArray)
 
 
-                console.log(this.profileButtons.valoresSecondaryOpacity)
+                
 
 
 
